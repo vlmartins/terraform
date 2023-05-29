@@ -1,0 +1,9 @@
+linha 20 --->  key_name = aws_key_pair.example[count.index].key_name
+
+
+resource "aws_key_pair" "example" {
+  count = length(var.users)
+
+  key_name   = var.users[count.index].name
+  public_key = var.users[count.index].auth_key
+}
