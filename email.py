@@ -1,4 +1,5 @@
 import json
+from gmail import send_email
 
 # Load the JSON data
 with open("user.json") as f:
@@ -14,6 +15,8 @@ users = [
     for key, value in data.items()
 ]
 
-# Print the parsed data
+# Send the parsed data
+#"User: {user['name']}, Email: {user['email']}, IP Address: {user['ip_address']
 for user in users:
-    print(f"User: {user['name']}, Email: {user['email']}, IP Address: {user['ip_address']}")
+    message = f"Olá {user['name']}, sua máquina já pode ser acessada no IP público: {user['ip_address']}"
+    send_email(user['email'], message)

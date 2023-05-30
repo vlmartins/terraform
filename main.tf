@@ -9,7 +9,7 @@ variable "users" {
 }
 
 provider "aws" {
-  region  = "sa-east-1"
+  region  = "us-east-1"
 }
 
 resource "aws_security_group" "devs2blu_sg" {
@@ -49,7 +49,7 @@ resource "aws_security_group" "devs2blu_sg" {
 resource "aws_instance" "devs2blu" {
   count = length(var.users)
 
-  ami           = "ami-06fce8d0a4e8889ca"
+  ami           = "ami-053b0d53c279acc90"
   instance_type = "t2.micro" //Example instance type, replace with your own
 
   key_name = aws_key_pair.devops[count.index].key_name
