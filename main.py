@@ -1,5 +1,6 @@
 import subprocess
 import pandas as pd
+import json
 
 #create list of dictionaries
 users = []
@@ -31,5 +32,4 @@ with open("users.tfvars", "w") as file:
 #run terraform
 subprocess.run(["terraform", "init"])
 subprocess.run(["terraform", "apply", "-auto-approve", "-var-file=users.tfvars"])
-
 

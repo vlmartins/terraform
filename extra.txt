@@ -1,9 +1,14 @@
-linha 20 --->  key_name = aws_key_pair.example[count.index].key_name
 
 
-resource "aws_key_pair" "example" {
-  count = length(var.users)
+#loads hostname and ip for the provisioned machines
+command = ["terraform", "output", "-json", "instance_details"]
+result = subprocess.run(command, capture_output=True, text=True)
 
-  key_name   = var.users[count.index].name
-  public_key = var.users[count.index].auth_key
-}
+if result.returncode == 0:
+    data = json.loads(result.stdout)
+
+    with open("instance_details.json", "w") as outfile:
+        json.dump(data, outfile)
+else:
+    print("Error: ", result.stderr)
+
